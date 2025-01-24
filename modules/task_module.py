@@ -11,7 +11,7 @@ class TaskModule(BaseModule):
 Usage: task [command] <args>
 
 Examples:
-task add <task> <due_to>            Add a new task.
+task add <due_to> <task>            Add a new task.
 task remove <task_id(s)>            Remove task(s).
 task edit <task_id> <task>          Edit a task.
 task complete <task_id(s)>          Mark task(s) as complete.
@@ -38,7 +38,7 @@ task list                           List all the tasks.
             json.dump(self.tasks, f, indent=2)
             
  
-    def _add_task(self, content, due_to):
+    def _add_task(self, due_to, content):
         if not content:
             return "Please provide the task content."
         content = " ".join(content)
@@ -199,7 +199,7 @@ task list                           List all the tasks.
         if args:
             match args[0]:
                 case "add":
-                    return self._add_task(args[1:])
+                    return self._add_task(args[1], args[2:])
                 case "list":
                     return self._list_tasks()
                 case "complete":
